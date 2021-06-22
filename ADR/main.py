@@ -1,16 +1,21 @@
-# This is a sample Python script.
+from logging import getLogger
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+log = getLogger(__name__)
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    # 로거 설정
+    # create_log_setting()
+
+    # 객체 설정
+
+    # log.info('start main')
+
+    # 작업 생성
+
+    # 프로그램 종료 방지
+    print("main")
+    while True:
+        pass
+
+    print("end")

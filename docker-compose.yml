@@ -6,7 +6,9 @@ services:
       context: ADR
       dockerfile: Dockerfile
     volumes:
-    - ./ADR:/project
+      - ./ADR:/project
+    command:
+      - "docker_compose"
     environment:
       TZ: Asia/Seoul
     networks:
