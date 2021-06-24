@@ -1,10 +1,19 @@
+"""
+api를 사용하여 데이터를 가져오는 객체
+지정된 형식에 맞게 api를 요쳥
+"""
+
 from datetime import datetime
 from typing import Dict
 
-from DataProcessing.adr_api_client import ADR_API_Client
+from DataProcessing.API.adr_api_client import ADR_API_Client
 
 
-class DataReceiver(object):
+class API_Receiver(object):
+    """
+    api를 사용하여 데이터를 가져오는 객체
+    지정된 형식에 맞게 api를 요쳥
+    """
     def __init__(self):
         self.adr_api = ADR_API_Client()
 

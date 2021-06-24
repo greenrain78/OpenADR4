@@ -1,3 +1,7 @@
+"""
+실질적으로 api를 요청해서 데이터를 가져오는 객체
+"""
+
 from typing import Optional
 import requests
 

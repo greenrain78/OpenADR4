@@ -29,7 +29,17 @@ class DataEngineELEC(DataEngine):
     def __init__(self):
         self.db = DBAdapterELEC()
 
-    def save(self):
+    def save_by_api(self, siteId, data):
+        """
+        api로 부터 받아온 데이터를 그대로 DB에 저장
+        :param siteId:
+        :param data: 데이터
+        :return:
+        """
+        data_list = data.get('elecs')
+        for data in data_list:
+            # 데이터 전처리 필요
+            self.db.insert_api_raw(siteId, data)
         pass
 
     def read(self):
@@ -49,6 +59,7 @@ class DataEngineEQPS(DataEngine):
         self.db = DBAdapterEQPS()
 
     def save(self):
+
         pass
 
     def read(self):

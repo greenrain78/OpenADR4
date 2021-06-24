@@ -1,7 +1,7 @@
 version: '3'
 services:
-  main-service:
-    container_name: main-python
+  adr_python:
+    container_name: adr_python
     build:
       context: ADR
       dockerfile: Dockerfile
