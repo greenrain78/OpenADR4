@@ -1,17 +1,15 @@
 CREATE TABLE equipments_info
 (
-    `id`      INT NOT NULL AUTO_INCREMENT,
     `siteId`  VARCHAR(25),
+    `perfId`  SMALLINT,
     `eqpCode` VARCHAR(100),
     `eqpName` VARCHAR(100),
     `eqpType` VARCHAR(100),
-    `perfId`  SMALLINT,
     `data_time`  datetime  NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id)
+    PRIMARY KEY (siteId, perfId)
 );
 CREATE TABLE power_info
 (
-    `id`          INT NOT NULL AUTO_INCREMENT,
     `siteId`      VARCHAR(25),
     `pnName`      VARCHAR(25),
     `eqpName`     VARCHAR(25),
@@ -29,6 +27,6 @@ CREATE TABLE power_info
     `voltagetR`   VARCHAR(25),
     `temperature` VARCHAR(25),
     `data_time`  datetime  NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id)
+    PRIMARY KEY (siteId, perfId, ymdms)
 );
 

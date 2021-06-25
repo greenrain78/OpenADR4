@@ -2,9 +2,10 @@
 DB에 연결하기 위해 sql문을 작성하는 객체
 
 """
+from typing import Dict
 
 from Controller.db_conneter import mariaDB_connect
-from db_settings import elec_table_name, elec_field, eqps_table_name
+from db_settings import elec_table_name, elec_field, eqps_table_name, eqps_field
 
 
 class DBAdapter:
@@ -13,6 +14,7 @@ class DBAdapter:
     부모 객체로서 기본적인 crud sql문들을 구현
     추후 orm방식을 도입하는 것을 고려
     """
+
     def __init__(self):
         self.db_connect = mariaDB_connect()
 
@@ -45,7 +47,7 @@ class DBAdapter:
         sql = sql_col + sql_val + f")"
         return sql
 
-    def get_select_sql(self, table_name, select_list=None, where_list: dict = None) -> str:
+    def get_select_sql(self, table_name, select_list=None, condition=None) -> str:
         """
         데이터 read에 사용하는 sql문 생성
         :param table_name:
@@ -53,7 +55,7 @@ class DBAdapter:
         :param where_list:
         :return:
         """
-        sql = f"SELETE "
+        sql = f"SELECT "
 
         # 가져올 데이터 선택
         if select_list is None:
@@ -69,9 +71,8 @@ class DBAdapter:
         sql += f"FROM {table_name} "
 
         # 조건식 입력
-        if where_list is not None:
-            for key, val in where_list:
-                sql += f"{key}={val}"
+        if condition is not None:
+            sql += f" WHERE {condition}"
 
         return sql
 
@@ -120,13 +121,17 @@ class DBAdapterELEC(DBAdapter):
 
 class DBAdapterEQPS(DBAdapter):
 
-    def select_api_data(self, siteId):
+    def select_api_data(self, empty=False):
+
+
         # 조건 설정
-        where_list = {
-            "siteId": siteId
-        }
-        # sql 생성
-        sql = self.get_select_sql(eqps_table_name, where_list=where_list)
+        if empty is False:
+            condition = f" eqpCode != -1"
+            # sql 생성
+            sql = self.get_select_sql(eqps_table_name, condition=condition)
+        else:
+            # sql 생성
+            sql = self.get_select_sql(eqps_table_name)
         print(sql, flush=True)
 
         # sql 실행
@@ -135,22 +140,18 @@ class DBAdapterEQPS(DBAdapter):
 
     def insert_api_date(self, siteId, data: dict):
         # 데이터 포멧 생성 - 해당 형식에 맞게 변형해서 삽입
-        data_format = eqps_table_name
+        # data_format = eqps_field # 알수 없는 오류로 변경 불가능
+
+        data_format = {}
+        for key in data.keys():
+            data_format[key] = "str"
 
         # sql 생성
-        sql = self.get_insert_sql(elec_table_name, siteId, data=data, data_format=data_format)
+        sql = self.get_insert_sql(eqps_table_name, siteId, data=data, data_format=data_format)
         print(sql, flush=True)
 
         # sql 실행
         self.db_connect.runSQL(sql)
 
     def update_api_date(self, siteId, data: dict):
-        # 데이터 포멧 생성 - 해당 형식에 맞게 변형해서 삽입
-        data_format = eqps_table_name
-
-        # sql 생성
-        sql = self.get_insert_sql(elec_table_name, siteId, data=data, data_format=data_format)
-        print(sql, flush=True)
-
-        # sql 실행
-        self.db_connect.runSQL(sql)
+        pass

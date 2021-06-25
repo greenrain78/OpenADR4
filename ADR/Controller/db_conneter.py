@@ -47,7 +47,7 @@ class mariaDB_connect:
 
     def getSQL(self, sql):
         try:
-            conn = getConn()
+            conn = self.getConn()
             cur = conn.cursor()
 
             cur.execute(sql)

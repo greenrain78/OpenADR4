@@ -21,7 +21,7 @@ services:
   mariaDB:
     image: mariadb:latest
     ports:
-      - 4491:3306
+      - 14491:3306
     volumes:
       - ./DB/conf.d:/etc/mysql/conf.d
       - ./DB/data:/var/lib/mysql
