@@ -56,5 +56,5 @@ class TestEngine:
                 # 데이터 저장
                 print(f"data : {data}", flush=True)
                 if data.get('elecs'):
-                    self.data_ELEC.save_by_api(data[0], data)
+                    self.data_ELEC.save_by_api(call_data[0], data)
                 # 화면에 표시
